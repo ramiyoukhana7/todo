@@ -106,13 +106,12 @@ export default function Home() {
               type="text"
               placeholder="Train chest, back and shoulders"
             />
-
             <button onClick={addNote}>Add to list</button>
           </form>
           <ul>
             {/* Vi mappar alla dokument i databasen som användaren har laddat upp */}
             {notes.map((doc) => (
-              // Vi skapar ett <li> element för varje dokument i databasen
+              // Vi renderar ett <li> element för varje dokument i databasen
               <li key={doc.id}>
                 <article>
                   {/* Med <h2> och <p> element som visar värdet som användaren har angett */}
