@@ -45,7 +45,7 @@ export default function Home() {
   const handleDescriptionInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewNote({ ...newNote, description: e.target.value });
   };
-
+  //Add note
   const addNote = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -61,7 +61,7 @@ export default function Home() {
     showNotes();
   };
 
-  //Vi tar ID från <li> som renderas och skickar det med firestore deleteDoc funktionen för att ta bort dokumentet från vår databas
+  //Remove note
   const removeNote = async (id: string) => {
     console.log(id);
     await deleteDoc(doc(FSDataBase, "notes", id));
@@ -147,6 +147,7 @@ export default function Home() {
                 </article>
                 {/* Och en knapp för att kunna kalla på removeNote funktionen */}
                 <button onClick={() => removeNote(doc.id)}>remove</button>
+
                 <button
                   onClick={() =>
                     handleEdit(doc.id, doc.data().title, doc.data().description)
