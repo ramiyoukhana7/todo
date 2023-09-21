@@ -7,17 +7,19 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
 }
 
 .form-container {
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #e76f51;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  background-color: #fff;
+  box-shadow: 0px 18px 58px -11px rgba(0, 0, 0, 0.75);
+  width: 600px;
+  background-color: #e76f51;
   padding: 20px;
+}
+.form-container h2 {
+  margin-bottom: 15px;
 }
 
 .input {
@@ -42,4 +44,12 @@ button {
   width: 100%;
   margin: 10px 0;
   padding: 6px;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0px 18px 44px -20px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
 }

@@ -13,6 +13,7 @@ export default function Signin() {
   return (
     <div className="main-container">
       <div className="form-container">
+        <img className="img" src="\digital.jpg" />
         <h2>Sign in to your account</h2>
         <div>
           <input

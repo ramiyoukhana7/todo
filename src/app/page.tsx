@@ -15,6 +15,7 @@ import {
   deleteDoc,
   doc,
   QueryDocumentSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 
 import { FSDataBase } from "./firebase";
@@ -65,6 +66,29 @@ export default function Home() {
     await deleteDoc(doc(FSDataBase, "notes", id));
   };
 
+  //Edit node
+  const [modalState, setModalState] = useState(false);
+  const [editNote, setEditNote] = useState({
+    id: "",
+    title: "",
+    description: "",
+  });
+
+  const handleEdit = (id: string, title: string, description: string) => {
+    setModalState(true);
+    setEditNote({ id, title, description });
+  };
+
+  const updateNote = async () => {
+    await updateDoc(doc(FSDataBase, "notes", editNote.id), {
+      title: editNote.title,
+      description: editNote.description,
+    });
+    setModalState(false);
+  };
+
+  //uppdatering
+
   useEffect(() => {
     const showNotes = async () => {
       if (session?.data?.user?.email) {
@@ -77,7 +101,7 @@ export default function Home() {
       }
     };
     showNotes();
-  }, [session]);
+  }, [session, updateNote, removeNote, addNote]);
 
   return (
     <main className="main-container">
@@ -120,9 +144,48 @@ export default function Home() {
                 </article>
                 {/* Och en knapp för att kunna kalla på removeNote funktionen */}
                 <button onClick={() => removeNote(doc.id)}>remove</button>
+                <button
+                  onClick={() =>
+                    handleEdit(doc.id, doc.data().title, doc.data().description)
+                  }
+                >
+                  edit note
+                </button>
               </li>
             ))}
           </ul>
+          {modalState && (
+            <div className="edit-popup">
+              <div className="edit-popup-content">
+                <h2>Edit title</h2>
+                <input
+                  className="edit-title"
+                  type="text"
+                  value={editNote.title}
+                  onChange={(e) =>
+                    setEditNote({ ...editNote, title: e.target.value })
+                  }
+                  placeholder="New title"
+                />
+                <h2>Edit description</h2>
+                <input
+                  className="edit-description"
+                  type="text"
+                  value={editNote.description}
+                  onChange={(e) =>
+                    setEditNote({ ...editNote, description: e.target.value })
+                  }
+                  placeholder="New description"
+                />
+                <div className="modal-btns">
+                  <button onClick={() => setModalState(false)}>Cancel</button>
+                  <button className="save-btn" onClick={updateNote}>
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

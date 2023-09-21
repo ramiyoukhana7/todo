@@ -18,6 +18,7 @@ export default function Signup() {
   return (
     <div className="main-container">
       <div className="form-container">
+        <img className="img" src="/digital-signup.jpg" />
         <h2>Sign up</h2>
         <div>
           <label>Email address</label>

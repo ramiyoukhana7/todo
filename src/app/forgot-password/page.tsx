@@ -16,6 +16,7 @@ export default function ResetPassword() {
   return (
     <div className="main-container">
       <div className="form-container">
+        <img className="img" src="/digital-forgot.jpg" />
         <h2>Forgot password</h2>
         <div>
           <label>Email address</label>
@@ -39,9 +40,7 @@ export default function ResetPassword() {
         </div>
         <div>
           <p>Remember your password?</p>
-          <button onClick={() => router.push("/reset-Password")}>
-            Sign in
-          </button>
+          <button onClick={() => router.push("/signin")}>Sign in</button>
         </div>
       </div>
     </div>
