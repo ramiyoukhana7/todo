@@ -38,11 +38,11 @@ export default function Home() {
 
   const [newNote, setNewNote] = useState({ title: "", description: "" });
 
-  const handleTitleInput = (e: any) => {
+  const handleTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewNote({ ...newNote, title: e.target.value });
   };
 
-  const handleDescriptionInput = (e: any) => {
+  const handleDescriptionInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewNote({ ...newNote, description: e.target.value });
   };
 
@@ -58,12 +58,14 @@ export default function Home() {
       description: newNote.description,
       userEmail: session?.data?.user?.email,
     });
+    showNotes();
   };
 
   //Vi tar ID från <li> som renderas och skickar det med firestore deleteDoc funktionen för att ta bort dokumentet från vår databas
   const removeNote = async (id: string) => {
     console.log(id);
     await deleteDoc(doc(FSDataBase, "notes", id));
+    showNotes();
   };
 
   //Edit node
@@ -85,23 +87,24 @@ export default function Home() {
       description: editNote.description,
     });
     setModalState(false);
+    showNotes();
   };
 
-  //uppdatering
+  //show notes
+  const showNotes = async () => {
+    if (session?.data?.user?.email) {
+      const q = query(
+        collection(FSDataBase, "notes"),
+        where("userEmail", "==", session?.data?.user?.email)
+      );
+      const queryResults = await getDocs(q);
+      setNotes(queryResults.docs);
+    }
+  };
 
   useEffect(() => {
-    const showNotes = async () => {
-      if (session?.data?.user?.email) {
-        const q = query(
-          collection(FSDataBase, "notes"),
-          where("userEmail", "==", session?.data?.user?.email)
-        );
-        const queryResults = await getDocs(q);
-        setNotes(queryResults.docs);
-      }
-    };
     showNotes();
-  }, [session, updateNote, removeNote, addNote]);
+  }, [session]);
 
   return (
     <main className="main-container">

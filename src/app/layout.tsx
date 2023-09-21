@@ -1,4 +1,6 @@
-import SessionProvider from "./SessionProvider";
+"use client";
+
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 type Props = {
