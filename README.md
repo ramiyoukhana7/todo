@@ -4,11 +4,16 @@ Tech stack:
 
 Next.JS 13, TypeScript, Next-Auth, Firebase, Firestore och Github
 
+
 Andra resurser:
 
 Färgtema: coolors.co
+
 Font: Google fonts Space Mono
+
 Knapp: getcssscan.com/css-buttons-examples
+
+
 
 User stories: 
 
